@@ -1,0 +1,78 @@
+class Stack:
+    def __init__(self):
+        self.TOP = -1
+        self.st = [None] * 20
+
+    def push(self, book_id, book_name):
+        if self.TOP == 19:
+            print("Stack is full")
+            return
+
+        for i in range(self.TOP + 1):
+            if self.st[i][0] == book_id:
+                print("Duplicate Book ID not allowed")
+                return
+
+        self.TOP += 1
+        self.st[self.TOP] = (book_id, book_name)
+
+        print("Book returned successfully")
+
+    def pop(self):
+        if self.TOP == -1:
+            print("Stack is underflow")
+            return
+
+        book = self.st[self.TOP]
+        self.st[self.TOP] = None
+        self.TOP -= 1
+
+        return book
+
+    def peek(self):
+        if self.TOP == -1:
+            print("Stack is empty")
+            return
+
+        print("Top Book:", self.st[self.TOP])
+
+    def display(self):
+        if self.TOP == -1:
+            print("Stack is empty")
+            return
+
+        for i in range(self.TOP, -1, -1):
+            print(self.st[i])
+
+
+s = Stack()
+
+while True:
+    print("\n1.Push")
+    print("2.Pop")
+    print("3.Peek")
+    print("4.Display")
+    print("5.Exit")
+
+    choice = int(input("Enter your choice: "))
+
+    if choice == 1:
+        book_id = int(input("Enter Book ID: "))
+        book_name = input("Enter Book Name: ")
+
+        s.push(book_id, book_name)
+
+    elif choice == 2:
+        print("Removed Book:", s.pop())
+
+    elif choice == 3:
+        s.peek()
+
+    elif choice == 4:
+        s.display()
+
+    elif choice == 5:
+        break
+
+    else:
+        print("Invalid choice")
