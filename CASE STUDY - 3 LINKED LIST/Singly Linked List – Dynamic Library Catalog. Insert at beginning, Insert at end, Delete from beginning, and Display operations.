@@ -1,0 +1,61 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insert_beginning(self, data):
+        newnode = Node(data)
+        newnode.next = self.head
+        self.head = newnode
+
+    def insert_end(self, data):
+        newnode = Node(data)
+
+        if self.head is None:
+            self.head = newnode
+        else:
+            temp = self.head
+
+            while temp.next is not None:
+                temp = temp.next
+
+            temp.next = newnode
+
+    def delete_beginning(self):
+        if self.head is None:
+            print("List is empty")
+        else:
+            print("Deleted:", self.head.data)
+            self.head = self.head.next
+
+    def display(self):
+        if self.head is None:
+            print("List is empty")
+        else:
+            temp = self.head
+
+            while temp is not None:
+                print(temp.data)
+                temp = temp.next
+
+
+l = LinkedList()
+
+l.insert_beginning("Python")
+l.insert_beginning("DSA")
+
+l.insert_end("DBMS")
+l.insert_end("Java")
+
+print("Library Catalog:")
+l.display()
+
+l.delete_beginning()
+
+print("After deletion:")
+l.display()
