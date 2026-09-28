@@ -1,0 +1,85 @@
+class Queue:
+    def __init__(self):
+        self.F = -1
+        self.R = -1
+        self.qt = [None] * 50
+
+    def enqueue(self, ticket_id, name):
+        if self.R == 49:
+            print("Queue is full")
+            return
+
+        for i in range(self.F, self.R + 1):
+            if self.qt[i][0] == ticket_id:
+                print("Duplicate Ticket ID not allowed")
+                return
+
+        self.R = self.R + 1
+        self.qt[self.R] = (ticket_id, name)
+
+        if self.F == -1:
+            self.F = 0
+
+        print("Passenger added successfully")
+
+    def dequeue(self):
+        if self.F == -1:
+            print("Queue is underflow")
+            return
+
+        passenger = self.qt[self.F]
+
+        if self.F == self.R:
+            self.F = self.R = -1
+        else:
+            self.F = self.F + 1
+
+        return passenger
+
+    def front(self):
+        if self.F == -1:
+            print("Queue is empty")
+            return
+
+        print("First Passenger:", self.qt[self.F])
+
+    def display(self):
+        if self.F == -1:
+            print("Queue is empty")
+            return
+
+        for i in range(self.F, self.R + 1):
+            print(self.qt[i])
+
+
+q = Queue()
+
+while True:
+    print("\n1.Enqueue")
+    print("2.Dequeue")
+    print("3.Front")
+    print("4.Display")
+    print("5.Exit")
+
+    choice = int(input("Enter your choice: "))
+
+    if choice == 1:
+        ticket_id = int(input("Enter Ticket ID: "))
+        name = input("Enter Passenger Name: ")
+
+        q.enqueue(ticket_id, name)
+
+    elif choice == 2:
+        print("Served Passenger:", q.dequeue())
+
+    elif choice == 3:
+        q.front()
+
+    elif choice == 4:
+        q.display()
+
+    elif choice == 5:
+        break
+
+    else:
+        print("Invalid choice")
