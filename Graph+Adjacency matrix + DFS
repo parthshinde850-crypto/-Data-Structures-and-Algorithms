@@ -1,0 +1,28 @@
+
+
+n = int(input("Enter number of vertices: "))
+
+graph = []
+
+for i in range(n):
+    row = list(map(int, input("Enter row " + str(i + 1) + ": ").split()))
+    graph.append(row)
+
+
+
+def dfs(vertex):
+    visited[vertex] = 1
+    print(vertex, end=" ")
+
+    for i in range(n):
+        if graph[vertex][i] == 1 and visited[i] == 0:
+            dfs(i)
+
+
+
+start = int(input("Enter starting vertex: "))
+
+visited = [0] * n
+
+print("DFS Traversal:")
+dfs(start)
